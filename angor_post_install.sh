@@ -27,6 +27,12 @@ function menu_principal() {
     echo -e "\e[31m     [5] \e[1m\e[4m\e[5mSalir\e[0m\e[0m" # imprimir en rojo
     echo -e "\e[1m\e[32m[+] Escriba el numero del paquete que desea instalar:\e[0m" # imprimir en verde
 }
+# si la opcion seleccionada es 1:
+function paquetes_basicos() {
+    echo -e "\e[1m\e[32m[+] Instalando paquetes basicos...\e[0m" # imprimir en verde
+    sudo apt install -y tmux ranger neofetch bpytop 
+    echo -e "\e[1m\e[32m[+] Paquetes basicos instalados correctamente\e[0m" # imprimir en verde
+}
 # si la opcion seleccionada es 2:
 function paquetes_desarrollo() {
     echo -e "\e[1m\e[32m[+] Instalando paquetes de desarrollo...\e[0m" # imprimir en verde
@@ -36,13 +42,13 @@ function paquetes_desarrollo() {
 # si la opcion seleccionada es 3:
 function paquetes_terminal() {
     echo -e "\e[1m\e[32m[+] Instalando paquetes de terminal y personalizacion...\e[0m" # imprimir en verde
-    sudo apt install -y bat exa fd pulsemixer elvis
+    sudo apt install -y bat exa fd zsh 
     echo -e "\e[1m\e[32m[+] Paquetes de terminal y personalizacion instalados correctamente\e[0m" # imprimir en verde
 }
 # si la opcion seleccionada es 4:
 function paquetes_escritorio() {
     echo -e "\e[1m\e[32m[+] Instalando paquetes de escritorio...\e[0m" # imprimir en verde
-    sudo apt install -y gnome-tweaks
+    sudo apt install -y flameshot
     echo -e "\e[1m\e[32m[+] Paquetes de escritorio instalados correctamente\e[0m" # imprimir en verde
 }
 # limpia la pantalla
@@ -114,7 +120,16 @@ sudo apt update
 sudo apt upgrade -y
 # si el sistema es raspberry pi os, instalar pi-apps
 if [ -f /etc/rpi-issue ]; then # si el sistema es raspberry pi os
-    # instalar pi-apps
-    #curl -sSL https://raw.githubusercontent.com/Botspot/pi-apps/master/install | bash
+    # instala pi-apps
+    curl -sSL https://raw.githubusercontent.com/Botspot/pi-apps/master/install | bash
 fi
-# notinhg
+
+# imprimir mensaje de despedida en la terminal de color verde
+echo -e "\e[32m[:] angortruper finalizado\e[0m"
+# esperar 2 segundos
+sleep 2
+# limpiar la pantalla
+clear
+# imprimir el logo de angortruper
+echo -e "\e[32m$EXAMPLE\e[0m"
+exit 
