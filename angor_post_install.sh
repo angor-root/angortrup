@@ -1,23 +1,4 @@
 #!/bin/bash
-# Este script instala todos los paquetes que uso en mi sistema operativo linux
-# y configura el sistema para que se vea y se use como yo quiero.
-# Los siguientes paquetes se instalan:
-# - bat: para ver archivos de texto
-# - fd: para buscar archivos
-# - exa: para ver archivos y directorios de forma mas amigable que ls
-# - zsh: para usar la terminal zsh en lugar de bash (y todos los paquetes que usa zsh)
-# - oh-my-zsh: para usar el framework oh-my-zsh
-# - powerlevel10k: para usar el tema powerlevel10k
-# - fzf: para usar fzf
-# - ripgrep: para usar ripgrep
-# - neovim: para usar neovim
-# - tmux: para usar tmux
-# - ranger: para usar ranger
-# - neofetch: para usar neofetch
-# - bpytop: para usar bpytop
-# - flameshot: para usar flameshot
-# - pi-apps: para usar pi-apps (solo si el sistema es raspberry pi os)
-
 function menu_principal() {
     echo -e "\e[1m\e[32m[+] Que paquetes desea instalar?\e[0m" # imprimir en verde
     echo -e "\e[33m     [1] Paquetes  \e[1m\bbasicos\e[0m\e[0m" # imprimir en amarillo
@@ -30,7 +11,7 @@ function menu_principal() {
 # si la opcion seleccionada es 1:
 function paquetes_basicos() {
     echo -e "\e[1m\e[32m[+] Instalando paquetes basicos...\e[0m" # imprimir en verde
-    sudo apt install -y tmux ranger neofetch bpytop 
+    # sudo apt install -y tmux ranger neofetch bpytop 
     echo -e "\e[1m\e[32m[+] Paquetes basicos instalados correctamente\e[0m" # imprimir en verde
 }
 # si la opcion seleccionada es 2:
@@ -50,6 +31,17 @@ function paquetes_escritorio() {
     echo -e "\e[1m\e[32m[+] Instalando paquetes de escritorio...\e[0m" # imprimir en verde
     sudo apt install -y flameshot
     echo -e "\e[1m\e[32m[+] Paquetes de escritorio instalados correctamente\e[0m" # imprimir en verde
+}
+function actualizar() {
+    echo -e "\e[1m\e[32m[+] Actualizando el sistema...\e[0m" # imprimir en verde
+    sudo apt update && sudo apt upgrade -y
+    echo -e "\e[1m\e[32m[+] Sistema actualizado correctamente\e[0m" # imprimir en verde
+}
+function personalizar_terminal(){
+    echo -e "\e[1m\e[32m[+] Personalizando la terminal...\e[0m" # imprimir en verde
+    # instalar oh-my-zsh
+    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    # instalar powerlevel10k
 }
 # limpia la pantalla
 clear
@@ -116,12 +108,16 @@ else
 fi
 
 # actualizar el sistema
-sudo apt update
-sudo apt upgrade -y
+actualizar
 # si el sistema es raspberry pi os, instalar pi-apps
 if [ -f /etc/rpi-issue ]; then # si el sistema es raspberry pi os
-    # instala pi-apps
-    curl -sSL https://raw.githubusercontent.com/Botspot/pi-apps/master/install | bash
+    # instala pi-apps si no esta instalado
+    if [ ! -d ~/pi-apps ]; then
+        echo -e "\e[1m\e[32m[+] Instalando pi-apps...\e[0m" # imprimir en verde
+        curl -sSL https://raw.githubusercontent.com/Botspot/pi-apps/master/install | bash
+    else
+        echo -e "\e[1m\e[32m[+] Pi-apps ya esta instalado\e[0m" # imprimir en verde
+    fi
 fi
 
 # imprimir mensaje de despedida en la terminal de color verde
