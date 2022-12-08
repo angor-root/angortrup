@@ -41,7 +41,11 @@ function personalizar_terminal(){
     echo -e "\e[1m\e[32m[+] Personalizando la terminal...\e[0m" # imprimir en verde
     # instalar oh-my-zsh
     sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    # instalar powerlevel10k
+    chsh -s $(which zsh)
+    # instalar las tipografia de meslolgs regular, blod y italic
+    sudo apt install fonts-powerline -y
+    # instalar el tema de zsh powerlevel10k
+    git clone --depth=1
 }
 # limpia la pantalla
 clear
