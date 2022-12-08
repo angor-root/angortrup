@@ -1,0 +1,2 @@
+# angortrup
+Angortrup es un proyecto de código abierto para instalacion de paquetes en un Linux recien instalado, con el objetivo de facilitar la insalacion y personalizacion de la terminal por ejemplo, con un enfoque en la rapidez y la facilidad de uso.
